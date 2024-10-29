@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  oracle:
+    image: container-registry.oracle.com/database/free:latest
+    container_name: oracle
+    ports:
+      - "1521:1521"    # Oracle Listener port
+      - "5500:5500"    # Enterprise Manager Express port
+    environment:
+      ORACLE_PWD: 'admin'   # Set your Oracle SYS and SYSTEM password
+      ORACLE_CHARACTERSET: 'AL32UTF8' # Optional, specify the database character set
+    volumes:
+      - oracle-data:/opt/oracle/oradata  # Mount volume to persist database data
+
+volumes:
+  oracle-data:
+    driver: local
+
