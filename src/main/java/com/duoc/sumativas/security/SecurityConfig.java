@@ -23,24 +23,24 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(csrf -> csrf.disable()) // Deshabilitar CSRF para facilitar pruebas
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.GET, "/api/libros/**").hasAnyRole("USER", "ADMIN") // GET permitido
-                        .requestMatchers(HttpMethod.POST, "/api/libros/**").hasRole("ADMIN") // POST permitido solo para
-                                                                                             // ADMIN
-                        .requestMatchers(HttpMethod.PUT, "/api/libros/**").hasRole("ADMIN") // PUT permitido solo para
-                                                                                            // ADMIN
-                        .requestMatchers(HttpMethod.DELETE, "/api/libros/**").hasRole("ADMIN") // DELETE permitido solo
-                                                                                               // para ADMIN
-                        .anyRequest().authenticated() // Cualquier otra ruta requiere autenticación
+                        .requestMatchers(HttpMethod.GET, "/api/products/**").hasAnyRole("USER", "ADMIN") 
+                        .requestMatchers(HttpMethod.POST, "/api/products/**").hasRole("ADMIN") 
+                                                                                             
+                        .requestMatchers(HttpMethod.PUT, "/api/products/**").hasRole("ADMIN") 
+                                                                                            
+                        .requestMatchers(HttpMethod.DELETE, "/api/products/**").hasRole("ADMIN") 
+                                                                                              
+                        .anyRequest().authenticated() 
                 )
                 .exceptionHandling(ex -> ex
-                        .authenticationEntryPoint(customAuthenticationEntryPoint) // Usar manejador personalizado para
-                                                                                  // 401 Unauthorized
-                        .accessDeniedHandler(accessDeniedHandler()) // Usar manejador personalizado para 403 Forbidden
+                        .authenticationEntryPoint(customAuthenticationEntryPoint) 
+                                                                                
+                        .accessDeniedHandler(accessDeniedHandler()) 
                 )
-                .httpBasic(withDefaults()) // Habilitar autenticación básica
-                .build(); // Construir la cadena de seguridad
+                .httpBasic(withDefaults()) 
+                .build(); 
     }
 
     @Bean

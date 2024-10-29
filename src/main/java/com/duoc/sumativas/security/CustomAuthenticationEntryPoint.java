@@ -18,6 +18,6 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         // Establecer el código de estado 401 Unauthorized
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         // Escribir el mensaje personalizado en la respuesta
-        response.getWriter().write("Error 401: No estás autenticado. Por favor, proporciona credenciales válidas.");
+        response.getWriter().write("Error 401: Acceso denegado.");
     }
 }
